@@ -1,0 +1,1 @@
+* http://d.hatena.ne.jp/xuwei/20121208/1354965354
