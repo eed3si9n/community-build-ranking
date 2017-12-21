@@ -1,16 +1,19 @@
-package sbt_plugin_ranking
+package community_build_ranking
 
 import gigahorse._, support.okhttp.Gigahorse
 import gigahorse.github.Github
 import scala.concurrent._, duration._
 
-object Main extends App{
+object Main extends App {
   val repo = """https:\/\/github.com\/([a-zA-Z0-9_\-]+)\/([a-zA-Z0-9_\-]+)""".r
-  val url = "http://www.scala-sbt.org/release/docs/Community-Plugins.html"
+
+  // val url = "http://www.scala-sbt.org/release/docs/Community-Plugins.html"
+  val url = "https://raw.githubusercontent.com/scala/community-builds/2.12.x/configs/project-refs.conf"
+
   val html = io.Source.fromURL(url).mkString
-  
+
   val repoList = repo.findAllIn(html).map{case repo(user,name) => user -> name }.toList.distinct
-  
+
   val client = Github.localConfigClient
 
   Gigahorse.withHttp { http =>
